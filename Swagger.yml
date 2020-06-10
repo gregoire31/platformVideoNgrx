@@ -1,0 +1,472 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Location Film à la demande
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: user
+    description: Everything about users
+
+  - name: Comment
+    description: Everithing avout comment
+    
+  - name: Catalogs
+    description: Everithing avout catalogs
+    
+  - name: Movie
+    description: Everithing avout movie
+    
+  - name: Payment
+    description: Everithing avout payment
+
+paths:
+  /users:
+    get:
+      tags:
+        - user
+      summary: Find list of all users
+      description: Return list of all users
+      operationId: getUserList
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "404":
+          description: User not found
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - user
+      summary: add new user
+      description: ""
+      operationId: listUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/User"
+        description: user object that need to be added
+        required: true
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "405":
+          description: Invalid input
+
+          
+  "/user/{userId}":
+    get:
+      tags:
+        - user
+      summary: Find user by ID
+      description: Returns a single user
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/User"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: User not found
+      security:
+        - bearerAuth: []
+    
+  "/user/login":
+    post:
+      tags:
+        - user
+      summary: Find user by ID
+      description: Returns a single user
+      operationId: checkAuthentification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/User"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: User not found
+            
+  "/verifyToken":
+    post:
+      tags:
+        - user
+      summary: Find user by ID
+      description: check if token send is valid
+      operationId: checkToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+        required: true
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/User"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: User not found
+            
+  "/comment":
+    post:
+      tags:
+        - Comment
+      summary: add new comment
+      description: "add a new comment"
+      operationId: addNewComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filmId:
+                  type: string
+                userId:
+                  type: string
+                message:
+                  type: string
+                dateCreated:
+                  type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListComment"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ListComment"
+        "400":
+          description: Invalid status value
+      security:
+        - bearerAuth: []
+            
+  "/comment/{commentId}":
+    get:
+      tags:
+        - Comment
+      summary: get list comment of a movie
+      description: ""
+      operationId: getCommentListOfAMovie
+      parameters:
+        - name: commentId
+          in: path
+          description: Id of the movie
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListComment"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ListComment"
+        "400":
+          description: Invalid status value
+      security:
+        - bearerAuth: []
+          
+  "/catalogs":
+    get:
+      tags:
+        - Catalogs
+      summary: get list of all movies
+      description: ""
+      operationId: getListMovies
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Movies"
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Movies"
+        "400":
+          description: Invalid status value
+      security:
+        - bearerAuth: []
+            
+  "/detail/{idMovie}":
+    get:
+      tags:
+        - Movie
+      summary: get information of a movie
+      description: ""
+      operationId: getOneMovieDetail
+      parameters:
+        - name: idMovie
+          in: path
+          description: Id of the movie
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/Movies"
+            application/xml:
+              schema:
+                  $ref: "#/components/schemas/Movies"
+        "400":
+          description: Invalid status value
+      security:
+        - bearerAuth: []
+            
+  "/addFilmPayedUser":
+    post:
+      tags:
+        - Movie
+      summary: add user payed
+      description: "it allow an user to download the movie"
+      operationId: addUserPayed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filmId:
+                  type: string
+                userId:
+                  type: string
+                dateCreated:
+                  type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/DetailMovie"
+            application/xml:
+              schema:
+                  $ref: "#/components/schemas/DetailMovie"
+        "400":
+          description: Invalid status value
+      security:
+        - bearerAuth: []
+            
+  "/payment":
+    post:
+      tags:
+        - Payment
+      summary: check payment
+      operationId: checkPayment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cardNumber:
+                  type: array
+                  items:
+                    type: string
+                
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                      type: boolean
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  response:
+                      type: boolean
+        "400":
+          description: Invalid status value
+      security:
+        - bearerAuth: []
+ 
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://netflix.swagger.io/v2
+  - url: http://netflix.swagger.io/v2
+  
+components:
+  parameters:
+    offsetParamCatalogs:  # <-- Arbitrary name for the definition that will be used to refer to it.
+                  # Not necessarily the same as the parameter name.
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+      description: The number of items to skip before starting to collect the result set.
+    limitParamCatalogs:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 30
+      description: The numbers of items to return.
+      
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        password:
+          type: string
+      xml:
+        name: User
+    ListComment:
+      type: object
+      properties:
+        _id:
+          type: string
+        comments:
+          type: array
+          items:
+            $ref: "#/components/schemas/Comment"
+      xml:
+        name: Comment
+    Comment:
+      type: object
+      properties:
+        idUser:
+          type: string
+        message:
+          type: string
+        dateCreated:
+          type: string
+    Movies:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        image:
+          type: string
+        description:
+          type: string
+        prix:
+          type: string
+          
+    DetailMovie:
+      type: object
+      properties:
+        film:
+          $ref: "#/components/schemas/Movies"
+        usersPayed:
+          type: array
+          items:
+            $ref: "#/components/schemas/UsersPayed"
+            
+    UsersPayed:
+      type: object
+      properties:
+        idUser:
+          type: string
+        datePayed:
+          type: string

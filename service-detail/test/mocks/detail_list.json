@@ -1,0 +1,131 @@
+[
+    {
+        
+        "_id": "5e99dd6a766fp369c81dec71",
+        "usersPayed": [
+          {
+          "userId":"5e99dd6a777f9369c81dec6f",
+          "dateCreated": "2020-06-03 23:00"
+          },
+          {
+            "userId":"5e99dd6a766f9369c81d6670",
+            "dateCreated": "2020-06-03 23:00"
+          }
+        ]
+    },
+    {
+        "_id": "5e99dd6a766f4369c81dec71",
+        "usersPayed": [
+          {
+          "userId":"5e99dd6a777f9369c81dec6f",
+          "dateCreated": "2020-06-03 23:00"
+          },
+          {
+            "userId":"5e99dd6a766f9369c81d6670",
+            "dateCreated": "2020-06-03 23:00"
+          }
+        ]
+    },
+    {
+        "_id": "5e99dd6a766f9369c81d8c71",
+        "usersPayed": [
+          {
+          "userId":"5e99dd6a777f9369c81dec6f",
+          "dateCreated": "2020-06-03 23:00"
+          },
+          {
+            "userId":"5e99dd6a766f9369c81d6670",
+            "dateCreated": "2020-06-03 23:00"
+          }
+        ]
+    },
+    {
+        "_id": "5e99dd6a766f936gc81dec71",
+        "usersPayed": [
+          {
+          "userId":"5e99dd6a777f9369c81dec6f",
+          "dateCreated": "2020-06-03 23:00"
+          },
+          {
+            "userId":"5e99dd6a766f9369c81d6670",
+            "dateCreated": "2020-06-03 23:00"
+          }
+        ]
+    },
+    {
+        "_id": "5e99dd6a766f9369ca1dec71",
+        "usersPayed": [
+          {
+          "userId":"5e99dd6a777f9369c81dec6f",
+          "dateCreated": "2020-06-03 23:00"
+          },
+          {
+            "userId":"5e99dd6a766f9369c81d6670",
+            "dateCreated": "2020-06-03 23:00"
+          }
+        ]
+    },
+    {
+        "_id": "5e9qdd6a766f9369c81d8c71",
+        "usersPayed": [
+          {
+          "userId":"5e99dd6a777f9369c81dec6f",
+          "dateCreated": "2020-06-03 23:00"
+          },
+          {
+            "userId":"5e99dd6a766f9369c81d6670",
+            "dateCreated": "2020-06-03 23:00"
+          }
+        ]
+    },
+    {
+        "_id": "5m99dd6a766f936gc81dec71",
+        "usersPayed": [
+          {
+          "userId":"5e99dd6a777f9369c81dec6f",
+          "dateCreated": "2020-06-03 23:00"
+          },
+          {
+            "userId":"5e99dd6a766f9369c81d6670",
+            "dateCreated": "2020-06-03 23:00"
+          }
+        ]
+    },
+    {
+        "_id": "5e99dd6a766f9369fr1dec71",
+        "usersPayed": [
+          {
+          "userId":"5e99dd6a777f9369c81dec6f",
+          "dateCreated": "2020-06-03 23:00"
+          },
+          {
+            "userId":"5e99dd6a766f9369c81d6670",
+            "dateCreated": "2020-06-03 23:00"
+          }
+        ]
+    }
+]
+
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  

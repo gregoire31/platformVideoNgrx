@@ -1,0 +1,31 @@
+
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Film à la demande</span>
+      <span class="example-spacer"></span>
+      <mat-icon (click)="goToCatalogs()" class="example-icon" aria-hidden="false" aria-label="Example heart icon">collections</mat-icon>
+      <mat-icon (click)="logOut()" class="example-icon" aria-hidden="false" aria-label="Example delete icon">logout</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+<div fxLayout="row wrap" fxLayoutAlign="center stretch"  fxLayoutGap="10px" style="background-color: lightgrey;">
+    <div  fxFlex="25%" *ngFor="let film of listFilms" 
+      style="margin-top: 20px;padding: 5px; text-align: center;">
+      <mat-card class="example-card">
+        <mat-card-header fxLayoutAlign="center">
+            <mat-card-title>{{film.title}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="{{film.image}}">
+        <mat-card-content>
+            <p style="height: 70px;" ellipsis>
+                {{film.description}}
+            </p>
+            
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>{{film.prix}}</button>
+            <button mat-raised-button color="primary" (click)="goToDetailFilm(film._id)">VOIR</button>
+        </mat-card-actions>
+    </mat-card>
+    </div>
+  </div>

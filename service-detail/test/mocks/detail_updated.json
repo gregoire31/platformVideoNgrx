@@ -1,0 +1,18 @@
+{
+        
+    "_id": "5e99dd6a766fp369c81dec71",
+    "usersPayed": [
+      {
+      "userId":"5e99dd6a777f9369c81dec6f",
+      "dateCreated": "2020-06-03 23:00"
+      },
+      {
+        "userId":"5e99dd6a766f9369c81d6670",
+        "dateCreated": "2020-06-03 23:00"
+      },
+      {
+        "userId":"5229dd6a766f9369c81dec71",
+        "dateCreated": "2020-06-03 23:00"
+      }
+    ]
+}

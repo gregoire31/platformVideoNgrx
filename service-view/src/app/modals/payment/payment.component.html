@@ -1,0 +1,33 @@
+
+<div class="card-bounding">
+
+    <aside>Card Number:</aside>
+    <div class="card-container">
+      <!--- ".card-type" is a sprite used as a background image with associated classes for the major card types, providing x-y coordinates for the sprite --->
+      <div class="card-type"></div>
+      <input [(ngModel)]="cardNumber" maxlength="16" placeholder="0000 0000 0000 0000" />
+      <!-- The checkmark ".card-valid" used is a custom font from icomoon.io --->
+      <div class="card-valid">&#xea10;</div>
+    </div>
+  
+    <div class="card-details clearfix">
+  
+      <div class="expiration">
+        <aside>Expiration Date</aside>
+        <input [(ngModel)]="dateCard" maxlength="5" placeholder="12/31" />
+      </div>
+  
+      <div class="cvv">
+        <aside>CVV</aside>
+        <input [(ngModel)]="csv" maxlength="3" placeholder="XXX"/>
+      </div>
+    </div>
+</div>
+<div fxLayoutAlign="center" >
+  <div style="color:red; font-size: 30px; padding-top: 10px;" *ngIf= "!validationCard">
+    Mauvaise carte
+  </div>
+</div>
+<div fxLayoutAlign="center" >
+<button style="margin-top:20px; text-align:center" mat-raised-button color="primary" (click)="payer()">Payer</button>
+</div>

@@ -1,0 +1,22 @@
+[
+    {
+        "_id": "5e99dd6a777f9369c81dec6f",
+        "username":"admin",
+        "password":"admin"
+    },
+    {
+        "_id": "5e99dd6a766f9369c81d6670",
+        "username":"gregoire",
+        "password":"1234"
+    },
+    {
+        "_id": "5229dd6a766f9369c81dec71",
+        "username":"cockpit",
+        "password":"petals"
+    },
+    {
+        "_id": "5229dd6a766f9369c81d3333",
+        "username":"test",
+        "password":"test"
+    }
+]

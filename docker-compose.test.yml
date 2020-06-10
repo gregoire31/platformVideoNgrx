@@ -1,0 +1,100 @@
+version: "3"
+services:  
+  service-catalogs:
+    build: ./service-catalogs
+    volumes:
+      - ./service-catalogs:/usr/src/app
+      - service-catalogs-node_modules:/usr/src/app/node_modules
+    environment:
+      NODE_ENV: development
+      SERVICE_ADDRESS: service-catalogs
+    depends_on:
+      - consul
+      - mongo
+    ports:
+      - 3001:3000
+    command: npm test
+
+  service-detail:
+    build: ./service-detail
+    volumes:
+      - ./service-detail:/usr/src/app
+      - service-detail-node_modules:/usr/src/app/node_modules
+    environment:
+      NODE_ENV: development
+      SERVICE_ADDRESS: service-detail
+    depends_on:
+      - consul
+      - mongo
+    ports:
+      - 3003:3000
+    command: npm test
+
+  service-comment:
+    build: ./service-comment
+    volumes:
+      - ./service-comment:/usr/src/app
+      - service-comment-node_modules:/usr/src/app/node_modules
+    environment:
+      NODE_ENV: development
+      SERVICE_ADDRESS: service-comment
+    depends_on:
+      - consul
+      - mongo
+    ports:
+      - 3000:3000
+    command: npm test
+
+  service-paiement:
+    build: ./service-paiement
+    volumes:
+      - ./service-paiement:/usr/src/app
+      - service-paiement-node_modules:/usr/src/app/node_modules
+    environment:
+      NODE_ENV: development
+      SERVICE_ADDRESS: service-paiement
+    depends_on:
+      - consul
+      - mongo
+    ports:
+      - 3004:3000
+    command: npm test
+
+  service-authentification:
+    build: ./service-authentification
+    volumes:
+      - ./service-authentification:/usr/src/app
+      - service-authentification-node_modules:/usr/src/app/node_modules
+    environment:
+      NODE_ENV: development
+      SERVICE_ADDRESS: service-authentification
+      SECRETTOKEN: scrtlocapp
+    depends_on:
+      - consul
+      - mongo
+    ports:
+      - 3005:3000
+    command: npm test
+
+  consul:
+    image: consul
+    ports:
+      - 8500:8500
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_DATABASE: film-Test
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb-app-test:/data-test/db
+      - ./service-catalogs/seeds/test.js:/docker-entrypoint-initdb.d/test.js:ro
+
+volumes:
+  service-catalogs-node_modules:
+  service-detail-node_modules:
+  service-comment-node_modules:
+  service-paiement-node_modules:
+  service-authentification-node_modules:
+  mongodb-app-test:
