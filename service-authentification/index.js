@@ -80,8 +80,7 @@ app.post('/users', async(req,res) => {
       password
     }
     
-    await addNewUser(userToAdd)
-    let getNewUser = await findAllUsers(true)
+    let getNewUser = await addNewUser(userToAdd)
     res.json(getNewUser)
   }else{
     res.send(getUserList)

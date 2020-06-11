@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import { WrongPasswordModalComponent } from 'src/app/modals/wrong-password-modal/wrong-password-modal.component';
 import { forkJoin } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { initialiseState, RegisterUser } from 'src/app/store/user/action';
 
 @Component({ 
   selector: 'app-authentification',
@@ -20,8 +22,9 @@ export class AuthentificationComponent implements OnInit {
   constructor(private fb:FormBuilder, 
     private authService: AuthService, 
     private router: Router,
-    public dialog: MatDialog) {
-
+    public dialog: MatDialog,
+    private store : Store) {
+    
     }
 
   ngOnInit(): void {
@@ -30,6 +33,9 @@ export class AuthentificationComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.authService.getUserList().subscribe(usersList => {
+      this.store.dispatch(new initialiseState(usersList))
+    })
   }
 
 isFieldInvalid(field: string) { // {6}
@@ -71,20 +77,30 @@ isFieldInvalid(field: string) { // {6}
               )
         }else{
 
-          let addUser = this.authService.register(val.email,val.password)
-          let userList = this.authService.getUserList()
-          forkJoin([addUser, userList]).subscribe(results => {
-            console.log(results[0]);
-            if(results[0].length === results[1].length){
-              this.openDialog()
-            }else{
+          this.authService.register(val.email,val.password).subscribe(user => {
+            if(user.length === 1){
+              this.store.dispatch(new RegisterUser(user[0]))
               this.isCorrectRegister = true
               this.openDialog()
               this.isLogging = true
+            }else{
+              this.openDialog()
             }
-            
-            
           })
+          // let userList = this.authService.getUserList()
+          // forkJoin([addUser, userList]).subscribe(results => {
+          //   console.log(results[0]);
+          //   if(results[0].length === results[1].length){
+          //     this.openDialog()
+          //   }else{
+
+          //     this.isCorrectRegister = true
+          //     this.openDialog()
+          //     this.isLogging = true
+          //   }
+            
+            
+          // })
         }
     }
 

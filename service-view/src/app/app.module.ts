@@ -15,6 +15,9 @@ import { EllipsisModule } from 'ngx-ellipsis';
 import { DetailFilmComponent } from './component/detail-film/detail-film.component';
 import { AuthInterceptor } from './interceptor/authInterceptor';
 import { PaymentComponent } from './modals/payment/payment.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { reducer } from './store/user/reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +36,12 @@ import { PaymentComponent } from './modals/payment/payment.component';
     AppMaterialModule,
     FlexLayoutModule,
     EllipsisModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({appState: reducer}),
+    StoreDevtoolsModule.instrument({
+      name: 'Counterx devtools',
+      maxAge: 15
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
