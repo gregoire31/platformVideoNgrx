@@ -2,7 +2,7 @@ import { addUser, userListStore } from 'src/app/interface/user-interface';
 import { UserActionTypes } from './action'
 import { strictEqual } from 'assert';
 
-const initialState: userListStore = {
+const initialStateUser: userListStore = {
     getUserList : [{
         _id : '',
         password : '',
@@ -10,7 +10,7 @@ const initialState: userListStore = {
     }]
 }
 
-export function reducer(state = initialState, action){
+export function userReducer(state = initialStateUser, action){
     switch (action.type) {
         case UserActionTypes.ListUsers:
             const userList = {

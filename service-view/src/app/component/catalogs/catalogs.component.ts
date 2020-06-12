@@ -2,20 +2,39 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CatalogsService } from 'src/app/service/catalogs.service';
 import { AuthService } from 'src/app/service/auth.service';
-
+import { Store } from '@ngrx/store';
+import { initialiseStateCatalogs } from 'src/app/store/catalog/action';
+import { FilmListStore } from 'src/app/interface/film-interface';
+import * as catalogActions from '../../store/catalog/action'
 @Component({
   selector: 'app-catalogs',
   templateUrl: './catalogs.component.html',
   styleUrls: ['./catalogs.component.css']
 })
 export class CatalogsComponent implements OnInit {
-  public listFilms = []
-  constructor(private route : Router, private catalogService : CatalogsService, private authService : AuthService) { }
+  public listFilms : FilmListStore = {
+    getListFilm : [{
+      _id : '',
+      description:'',
+      image:'',
+      prix:'',
+      title:''
+    }]
+  }
+  constructor(
+    private route : Router,
+    private catalogService : CatalogsService,
+    private authService : AuthService,
+    private store : Store) { }
 
   ngOnInit(): void {
+    
     this.catalogService.getListFilms().subscribe(
       (response) => {
-        this.listFilms = response
+        this.listFilms.getListFilm = response
+        let getListFilm = response
+        console.log(getListFilm);
+        this.store.dispatch(new catalogActions.initialiseStateCatalogs(getListFilm))
       },
       (error) => {
         console.log('Erreur ! : ' + error);

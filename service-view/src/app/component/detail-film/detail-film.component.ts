@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { forkJoin } from 'rxjs';
 
 import * as moment from 'moment';
-import { timeLeft, Film } from 'src/app/interface/film-interface';
+import { timeLeft, FilmListStoreDetail } from 'src/app/interface/film-interface';
 import { CommentsService } from 'src/app/service/comments.service';
 import { Comments } from 'src/app/interface/comment-interface';
 import { PaymentComponent } from 'src/app/modals/payment/payment.component';
@@ -30,20 +30,22 @@ export class DetailFilmComponent implements OnInit {
       dateCreated: "",
     }]
 }
-  public film: Film = {
-    description: "",
-    image : "",
-    prix: "",
-    title: "",
-    usersPayed : [{
-      userId: "",
-      dateCreated: "",
-      date: ""
-    }],
-    _id: "",
-    canDownload: {
-      hasPayed: false,
-      date:""
+  public film: FilmListStoreDetail = {
+    getListFilm : {
+      description: "",
+      image : "",
+      prix: "",
+      title: "",
+      usersPayed : [{
+        userId: "",
+        dateCreated: "",
+        date: ""
+      }],
+      _id: "",
+      canDownload: {
+        hasPayed: false,
+        date:""
+      }
     }
   }
   public timeLeft: timeLeft = {
@@ -72,11 +74,18 @@ export class DetailFilmComponent implements OnInit {
 
     forkJoin([detailFilm, userList,commentsList]).subscribe(results => {
       console.log(results);
-      
-      this.film = results[0]
-      this.film.canDownload = {
-        hasPayed:false,
-        date:''
+    
+      this.film.getListFilm =  {
+        _id : results[0]._id,
+        description : results[0].description,
+        image : results[0].image,
+        prix: results[0].prix,
+        title: results[0].title,
+        canDownload : {
+          hasPayed:false,
+          date:''
+        },
+        usersPayed : results[0].usersPayed
       }
       this.commentaires = results[2]
       if(this.commentaires !== null){
@@ -94,22 +103,25 @@ export class DetailFilmComponent implements OnInit {
         )
       }
       
-      this.film.usersPayed.map(
+      this.film.getListFilm.usersPayed.map(
         userPay => {
               if(this.currentUserId === userPay.userId){
-                this.film.canDownload = {hasPayed : true, date : userPay.dateCreated}
+                this.film.getListFilm.canDownload = {hasPayed : true, date : userPay.dateCreated}
               }
         })
+
+      console.log(this.film.getListFilm);
       
-      if(this.film.canDownload.hasPayed){
-        let timeMinuteLeft = 1440 - Number(moment().diff(moment(this.film.canDownload.date), 'minutes'))
+      
+      if(this.film.getListFilm.canDownload.hasPayed){
+        let timeMinuteLeft = 1440 - Number(moment().diff(moment(this.film.getListFilm.canDownload.date), 'minutes'))
         
         if(timeMinuteLeft <= 1440 || timeMinuteLeft > 1440 ){
           this.timeLeft.hour = Number(Math.trunc(timeMinuteLeft / 60))
           this.timeLeft.minute = Number(timeMinuteLeft - (this.timeLeft.hour * 60))
         }
         if (timeMinuteLeft < 0){
-          this.film.canDownload.hasPayed = false
+          this.film.getListFilm.canDownload.hasPayed = false
         }
       }
       
@@ -128,7 +140,7 @@ export class DetailFilmComponent implements OnInit {
 
           data.usersPayed.forEach(user => {
             if(user.userId === this.currentUserId){
-              this.film.canDownload = {
+              this.film.getListFilm.canDownload = {
                 hasPayed : true,
                 date: user.dateCreated
               }
@@ -153,7 +165,7 @@ export class DetailFilmComponent implements OnInit {
   sendComment(){
     
     let hourActual = String(moment().format("YYYY-MM-DD-H-M"));
-    let addComment = this.commentService.addComment(this.film._id,this.currentUserId,this.commentToSend,hourActual)
+    let addComment = this.commentService.addComment(this.film.getListFilm._id,this.currentUserId,this.commentToSend,hourActual)
     let userList = this.authService.getUserList()
     forkJoin([addComment, userList]).subscribe(results => {
       this.noComment = false

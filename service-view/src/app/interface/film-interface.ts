@@ -3,9 +3,18 @@ export interface Film {
     image : string,
     prix: string,
     title: string,
+    // usersPayed : Array<userPay>,
+    _id: string;
+    // canDownload: authorizationDownload
+  }
+  export interface FilmDetail {
+    description: string,
+    image : string,
+    prix: string,
+    title: string,
     usersPayed : Array<userPay>,
     _id: string;
-    canDownload: authorizationDownload
+    // canDownload: authorizationDownload
   }
   export interface authorizationDownload{
       hasPayed: boolean,
@@ -21,3 +30,19 @@ export interface Film {
       hour: number,
       minute : number
   }
+
+  export interface FilmListStore {
+      getListFilm: Film[]
+  }
+
+  export interface FilmListStoreDetail {
+    getListFilm: {
+        description: string,
+        image : string,
+        prix: string,
+        title: string,
+        usersPayed : Array<userPay>,
+        _id: string;
+        canDownload: authorizationDownload
+    }
+}

@@ -17,7 +17,7 @@ import { AuthInterceptor } from './interceptor/authInterceptor';
 import { PaymentComponent } from './modals/payment/payment.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { reducer } from './store/user/reducer';
+import * as appState from '../root.reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +37,7 @@ import { reducer } from './store/user/reducer';
     FlexLayoutModule,
     EllipsisModule,
     FormsModule,
-    StoreModule.forRoot({appState: reducer}),
+    StoreModule.forRoot(appState.reducers),
     StoreDevtoolsModule.instrument({
       name: 'Counterx devtools',
       maxAge: 15

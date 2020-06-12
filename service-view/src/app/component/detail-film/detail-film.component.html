@@ -12,20 +12,20 @@
     <div  fxFlex="25%" style="margin-top: 20px;padding: 5px; text-align: center;">
       <mat-card class="example-card">
         <mat-card-header fxLayoutAlign="center">
-            <mat-card-title>{{film.title}}</mat-card-title>
+            <mat-card-title>{{film.getListFilm.title}}</mat-card-title>
         </mat-card-header>
-        <img mat-card-image src="{{film.image}}">
+        <img mat-card-image src="{{film.getListFilm.image}}">
         <mat-card-content>
             <p >
-                {{film.description}}
+                {{film.getListFilm.description}}
             </p>
             
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button>{{film.prix}}</button>
-            <button *ngIf="film.canDownload.hasPayed" mat-raised-button color="primary">Télécharger</button>
-            <button *ngIf="film.canDownload.hasPayed" mat-raised-button color="primary">Reste: {{timeLeft.hour}}h:{{timeLeft.minute}}</button>
-            <button *ngIf="!film.canDownload.hasPayed" mat-raised-button color="primary" (click)="pay()">Acheter</button>
+            <button mat-button>{{film.getListFilm.prix}}</button>
+            <button *ngIf="film.getListFilm.canDownload.hasPayed" mat-raised-button color="primary">Télécharger</button>
+            <button *ngIf="film.getListFilm.canDownload.hasPayed" mat-raised-button color="primary">Reste: {{timeLeft.hour}}h:{{timeLeft.minute}}</button>
+            <button *ngIf="!film.getListFilm.canDownload.hasPayed" mat-raised-button color="primary" (click)="pay()">Acheter</button>
         </mat-card-actions>
     </mat-card>
     </div>
@@ -34,7 +34,7 @@
             <mat-card-header fxLayoutAlign="center">
                 <mat-card-title>Commentaire</mat-card-title>
             </mat-card-header>
-            <ng-container *ngIf="!noComment && film.canDownload.hasPayed">
+            <ng-container *ngIf="!noComment && film.getListFilm.canDownload.hasPayed">
 
                 <mat-card-content *ngFor="let commentaire of commentaires.comments">
     
@@ -48,12 +48,12 @@
                 </mat-card-content>
             </ng-container>
 
-            <mat-form-field *ngIf="film.canDownload.hasPayed" style="width: 100%;" appearance="fill">
+            <mat-form-field *ngIf="film.getListFilm.canDownload.hasPayed" style="width: 100%;" appearance="fill">
                 <mat-label>Nouveau commentaire</mat-label>
                 <textarea matInput [(ngModel)]="commentToSend"></textarea>
               </mat-form-field>
 
-              <button *ngIf="film.canDownload.hasPayed" mat-raised-button color="primary" (click)="sendComment()">Envoyer</button>
+              <button *ngIf="film.getListFilm.canDownload.hasPayed" mat-raised-button color="primary" (click)="sendComment()">Envoyer</button>
         </mat-card>
     </div>
   </div>

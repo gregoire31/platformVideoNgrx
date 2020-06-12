@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
-import { Film } from '../interface/film-interface';
+import { Film, FilmDetail } from '../interface/film-interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +12,7 @@ export class CatalogsService {
 
   getListFilms(){
     return this.httpClient
-    .get<any[]>('http://localhost:3001/catalogs')
+    .get<Film[]>('http://localhost:3001/catalogs')
     
   }
 
@@ -22,6 +22,6 @@ export class CatalogsService {
 
   getDetailFilm(idFilm){
     return this.httpClient
-    .get<Film>(`http://localhost:3003/detail/${idFilm}`)
+    .get<FilmDetail>(`http://localhost:3003/detail/${idFilm}`)
   }
 }

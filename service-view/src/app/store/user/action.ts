@@ -11,7 +11,7 @@ export class listAllUsers implements Action {
     constructor(){}
 }
 
-export class initialiseState implements Action {
+export class initialiseStateUser implements Action {
     type = UserActionTypes.InitializeUserState;
     constructor(public payload: userList[]){}
 }

@@ -4,10 +4,10 @@ import { AuthService } from '../../service/auth.service'
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import { WrongPasswordModalComponent } from 'src/app/modals/wrong-password-modal/wrong-password-modal.component';
-import { forkJoin } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { initialiseState, RegisterUser } from 'src/app/store/user/action';
-
+import { Store } from '@ngrx/store';
+import { initialiseStateUser, RegisterUser } from 'src/app/store/user/action';
+import { IStore } from 'src/root.reducer';
+import * as AuthActions from '../../store/user/action'
 @Component({ 
   selector: 'app-authentification',
   templateUrl: './authentification.component.html',
@@ -23,7 +23,7 @@ export class AuthentificationComponent implements OnInit {
     private authService: AuthService, 
     private router: Router,
     public dialog: MatDialog,
-    private store : Store) {
+    private store: Store<IStore>) {
     
     }
 
@@ -34,7 +34,7 @@ export class AuthentificationComponent implements OnInit {
       password: ['', Validators.required]
     });
     this.authService.getUserList().subscribe(usersList => {
-      this.store.dispatch(new initialiseState(usersList))
+      this.store.dispatch(new AuthActions.initialiseStateUser(usersList))
     })
   }
 
