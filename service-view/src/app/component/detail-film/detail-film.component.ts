@@ -11,7 +11,8 @@ import { Comments } from 'src/app/interface/comment-interface';
 import { PaymentComponent } from 'src/app/modals/payment/payment.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailService } from 'src/app/service/detail.service';
-
+import { Store } from '@ngrx/store';
+import * as detailAction from '../../store/detail/action'
 @Component({
   selector: 'app-detail-film',
   templateUrl: './detail-film.component.html',
@@ -61,7 +62,8 @@ export class DetailFilmComponent implements OnInit {
     private authService : AuthService,
     private commentService: CommentsService,
     public dialog: MatDialog,
-    private detailService : DetailService) {
+    private detailService : DetailService,
+    private store : Store) {
     
   }
 
@@ -87,6 +89,7 @@ export class DetailFilmComponent implements OnInit {
         },
         usersPayed : results[0].usersPayed
       }
+      this.store.dispatch(new detailAction.initialiseStateDetail(this.film.getListFilm))
       this.commentaires = results[2]
       if(this.commentaires !== null){
         this.noComment = false

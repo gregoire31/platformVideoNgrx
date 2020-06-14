@@ -14,7 +14,7 @@ export interface Film {
     title: string,
     usersPayed : Array<userPay>,
     _id: string;
-    // canDownload: authorizationDownload
+    canDownload?: authorizationDownload
   }
   export interface authorizationDownload{
       hasPayed: boolean,
@@ -36,13 +36,5 @@ export interface Film {
   }
 
   export interface FilmListStoreDetail {
-    getListFilm: {
-        description: string,
-        image : string,
-        prix: string,
-        title: string,
-        usersPayed : Array<userPay>,
-        _id: string;
-        canDownload: authorizationDownload
-    }
+    getListFilm: FilmDetail
 }

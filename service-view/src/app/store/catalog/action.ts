@@ -1,17 +1,17 @@
 import { Action } from '@ngrx/store';
 import { FilmListStore, Film } from 'src/app/interface/film-interface';
 
-export enum UserActionTypes {
+export enum CatalogActionTypes {
     ListCatalogs = "[Catalog] list",
     InitializeCatalogsState = "[Catalog] initialize",
 }
 export class listAllCatalogs implements Action {
-    type = UserActionTypes.ListCatalogs;
+    type = CatalogActionTypes.ListCatalogs;
     constructor(){}
 }
 
 export class initialiseStateCatalogs implements Action {
-    type = UserActionTypes.InitializeCatalogsState;
+    type = CatalogActionTypes.InitializeCatalogsState;
     constructor(public payload: Film[]){}
 }
 
