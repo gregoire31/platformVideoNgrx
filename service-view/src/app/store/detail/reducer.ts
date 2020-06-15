@@ -32,10 +32,10 @@ export function detailReducer(state = initialStateCatalog, action){
 
 
 function addUserPayed(state : FilmListStoreDetail, payload : authorizationDownload){
-    // let newState = state.getListFilm.canDownload = payload
-    let newState = {
-        ...state
-    }
+    let newState = state.getListFilm.canDownload = payload
+    //  newState = {
+    //     ...state
+    // }
     return newState
 
 }
