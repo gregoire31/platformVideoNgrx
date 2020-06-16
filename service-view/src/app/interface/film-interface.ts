@@ -1,40 +1,40 @@
 export interface Film {
-    description: string,
-    image : string,
-    prix: string,
-    title: string,
+    description: string;
+    image : string;
+    prix: string;
+    title: string;
     // usersPayed : Array<userPay>,
     _id: string;
     // canDownload: authorizationDownload
   }
-  export interface FilmDetail {
-    description: string,
-    image : string,
-    prix: string,
-    title: string,
-    usersPayed : Array<userPay>,
+export interface FilmDetail {
+    description: string;
+    image : string;
+    prix: string;
+    title: string;
+    usersPayed : Array<userPay>;
     _id: string;
-    canDownload?: authorizationDownload
+    canDownload?: authorizationDownload;
   }
-  export interface authorizationDownload{
-      hasPayed: boolean,
-      date:string
-  }
-
-  export interface userPay{
-      userId: string,
-      dateCreated: string,
-      date: string
-  }
-  export interface timeLeft{
-      hour: number,
-      minute : number
+export interface authorizationDownload{
+      hasPayed: boolean;
+      date:string;
   }
 
-  export interface FilmListStore {
-      getListFilm: Film[]
+export interface userPay{
+      userId: string;
+      dateCreated: string;
+      date: string;
+  }
+export interface timeLeft{
+      hour: number;
+      minute : number;
   }
 
-  export interface FilmListStoreDetail {
-    getListFilm: FilmDetail
+export interface FilmListStore {
+      getListFilm: Film[];
+  }
+
+export interface FilmListStoreDetail {
+    getListFilm: FilmDetail;
 }

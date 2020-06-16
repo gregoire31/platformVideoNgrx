@@ -36,7 +36,7 @@
             </mat-card-header>
             <ng-container *ngIf="!noComment && film.getListFilm.canDownload.hasPayed">
 
-                <mat-card-content *ngFor="let commentaire of commentaires.comments">
+                <mat-card-content *ngFor="let commentaire of commentaires.getListComment.comments">
     
                     <mat-list>
                         <mat-list-item>{{commentaire.dateCreated}}</mat-list-item>

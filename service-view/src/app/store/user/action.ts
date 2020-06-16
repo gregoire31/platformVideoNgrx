@@ -2,16 +2,16 @@ import { Action } from '@ngrx/store';
 import { addUser, userList } from 'src/app/interface/user-interface';
 
 export enum UserActionTypes {
-    ListUsers = "[User] list",
-    InitializeUserState = "[User] initialize",
-    RegisterUser = "[User] Register"
+    ListUsers = '[User] list',
+    InitializeUserState = '[User] initialize',
+    RegisterUser = '[User] Register'
 }
-export class listAllUsers implements Action {
+export class ListAllUsers implements Action {
     type = UserActionTypes.ListUsers;
     constructor(){}
 }
 
-export class initialiseStateUser implements Action {
+export class InitialiseStateUser implements Action {
     type = UserActionTypes.InitializeUserState;
     constructor(public payload: userList[]){}
 }

@@ -39,14 +39,14 @@ describe('detail list', () => {
     // if(!userPresentInBase){
       getFilmDetail.usersPayed.push(newUserPayedData)
     // }
-    await detailRepo.addUserPayed(getFilmDetail)
+    await detailRepo.updateDetailUserPayed(getFilmDetail)
 
 
     let response = await detailRepo.findDetailById(newUserPayed._id,true);
     expect(response).to.be.deep.equal(detailUpdated);
   });
   it('should reset database as initialisation', async() => {
-    let response = await detailRepo.addUserPayed(detail,true)
+    let response = await detailRepo.updateDetailUserPayed(detail,true)
     expect(detail).to.be.deep.equal(detail);
   })
 });

@@ -1,5 +1,5 @@
 import { FilmListStore } from 'src/app/interface/film-interface';
-import { CatalogActionTypes } from './action'
+import { CatalogActionTypes } from './action';
 
 const initialStateCatalog: FilmListStore = {
     getListFilm : [{
@@ -9,7 +9,7 @@ const initialStateCatalog: FilmListStore = {
         prix: '',
         title: '',
     }]
-}
+};
 
 export function catalogReducer(state = initialStateCatalog, action){
     switch (action.type) {
@@ -17,13 +17,12 @@ export function catalogReducer(state = initialStateCatalog, action){
             const catalogList = {
                 ...state
             };
-        console.log(catalogList);
-        return catalogList;
+            return catalogList;
         case CatalogActionTypes.InitializeCatalogsState:
         return {
             ...state,
             getListFilm : [...action.payload]
-        }
+        };
         default:
             return state;
     }

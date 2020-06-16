@@ -5,26 +5,25 @@ import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import { WrongPasswordModalComponent } from 'src/app/modals/wrong-password-modal/wrong-password-modal.component';
 import { Store } from '@ngrx/store';
-import { initialiseStateUser, RegisterUser } from 'src/app/store/user/action';
+import { InitialiseStateUser, RegisterUser } from 'src/app/store/user/action';
 import { IStore } from 'src/root.reducer';
-import * as AuthActions from '../../store/user/action'
-@Component({ 
+import * as AuthActions from '../../store/user/action';
+@Component({
   selector: 'app-authentification',
   templateUrl: './authentification.component.html',
   styleUrls: ['./authentification.component.css']
 })
 export class AuthentificationComponent implements OnInit {
-  public isLogging = true
-  public emailAlreadyExist = false
-  public isCorrectRegister = false
-  form:FormGroup;
+  public isLogging = true;
+  public emailAlreadyExist = false;
+  public isCorrectRegister = false;
+  form: FormGroup;
   private formSubmitAttempt: boolean; // {2}
-  constructor(private fb:FormBuilder, 
-    private authService: AuthService, 
-    private router: Router,
-    public dialog: MatDialog,
-    private store: Store<IStore>) {
-    
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
+              private router: Router,
+              public dialog: MatDialog,
+              private store: Store<IStore>) {
     }
 
   ngOnInit(): void {
@@ -34,7 +33,7 @@ export class AuthentificationComponent implements OnInit {
       password: ['', Validators.required]
     });
     this.authService.getUserList().subscribe(usersList => {
-      this.store.dispatch(new AuthActions.initialiseStateUser(usersList))
+      this.store.dispatch(new AuthActions.InitialiseStateUser(usersList))
     })
   }
 
@@ -72,7 +71,7 @@ isFieldInvalid(field: string) { // {6}
                     }else{
   
                     }
-                      this.router.navigateByUrl('/catalogs-component');
+                    this.router.navigateByUrl('/catalogs-component');
                   }
               )
         }else{

@@ -8,13 +8,13 @@ export class DetailService {
 
   constructor(private httpClient: HttpClient) { }
 
-  acceptUserPaiement(idFilm:string,idUser:string,dateCreated:string){
+  acceptUserPaiement(idFilm: string, idUser: string, dateCreated: string){
 
-    let body = {
+    const body = {
       idFilm,
       idUser,
       dateCreated
-    }
-    return this.httpClient.post<any>(`http://localhost:3003/addFilmPayedUser`,body)
+    };
+    return this.httpClient.post<any>(`http://localhost:3003/addFilmPayedUser`, body);
   }
 }

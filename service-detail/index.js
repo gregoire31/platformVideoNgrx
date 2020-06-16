@@ -18,7 +18,7 @@ app.use(cors({
 
 const {
   findDetailById,
-  addUserPayed
+  updateDetailUserPayed
 } = require('./repository/detail')
 
 const port = process.env.PORT || 3000;
@@ -96,7 +96,7 @@ app.post('/addFilmPayedUser', async(req,response) => {
   if(!userPresentInBase){
     getFilmDetail.usersPayed.push(newUserPayed)
   }
-  await addUserPayed(getFilmDetail)
+  await updateDetailUserPayed(getFilmDetail)
   
   response.send(getFilmDetail)
 })
