@@ -13,6 +13,7 @@ import * as catalogActions from '../../store/catalog/action'
 })
 export class CatalogsComponent implements OnInit {
   public listFilms : FilmListStore = {
+    isFetching : false,
     getListFilm : [{
       _id : '',
       description:'',

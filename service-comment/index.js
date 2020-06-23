@@ -68,7 +68,7 @@ app.get('/comment/:id', async (req,response) => {
 
       getCommentList.comments.push(comment)
       await addComment(getCommentList)
-      response.send(getCommentList)
+      response.send(comment)
     }
     })
   

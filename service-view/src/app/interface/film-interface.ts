@@ -32,9 +32,11 @@ export interface timeLeft{
   }
 
 export interface FilmListStore {
-      getListFilm: Film[];
+    isFetching : boolean;
+    getListFilm: Film[];
   }
 
 export interface FilmListStoreDetail {
+    isFetching : boolean;
     getListFilm: FilmDetail;
 }

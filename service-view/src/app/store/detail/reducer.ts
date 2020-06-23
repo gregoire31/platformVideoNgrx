@@ -1,7 +1,8 @@
 import { FilmListStoreDetail } from 'src/app/interface/film-interface';
 import { DetailActionTypes } from './action';
 
-const initialStateCatalog: FilmListStoreDetail = {
+export const initialStateDetail: FilmListStoreDetail = {
+    isFetching: false,
     getListFilm : {
         _id: '',
         description: '',
@@ -16,15 +17,15 @@ const initialStateCatalog: FilmListStoreDetail = {
     }
 }
 
-export function detailReducer(state = initialStateCatalog, action){
+export function detailFilmReducer(state = initialStateDetail, action){
     switch (action.type) {
-        case DetailActionTypes.updateDetailUserPayed:
+        case DetailActionTypes.updateDetailUserPayedType:
             // return updateDetailUserPayed(state, action.payload)
             return {
                 ...state,
                 getListFilm: {...state.getListFilm, canDownload : action.payload}
             }
-        case DetailActionTypes.InitializeDetailState:
+        case DetailActionTypes.InitializeDetailStateType:
         return {
             ...state,
             getListFilm : action.payload

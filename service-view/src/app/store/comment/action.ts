@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import {  FilmDetail, authorizationDownload } from 'src/app/interface/film-interface';
-import { CommentStore } from 'src/app/interface/comment-interface';
+import { CommentStore, Comment } from 'src/app/interface/comment-interface';
 
 export enum CommentActionTypes {
     getListComment = '[Comment] get',

@@ -1,7 +1,8 @@
 import { FilmListStore } from 'src/app/interface/film-interface';
 import { CatalogActionTypes } from './action';
 
-const initialStateCatalog: FilmListStore = {
+export const initialStateCatalog: FilmListStore = {
+    isFetching : false,
     getListFilm : [{
         _id: '',
         description: '',

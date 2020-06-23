@@ -1,8 +1,10 @@
-import { FilmListStoreDetail } from 'src/app/interface/film-interface';
+
 import { CommentActionTypes } from './action';
 import { CommentStore } from 'src/app/interface/comment-interface';
+import { getListComment } from './selector';
 
-const initialStateCatalog: CommentStore = {
+export const initialStateComment: CommentStore = {
+    isFetching: false,
     getListComment : {
       _id : '',
       comments: [{
@@ -14,23 +16,23 @@ const initialStateCatalog: CommentStore = {
     }
 };
 
-export function commentReducer(state = initialStateCatalog, action){
+export function commentReducer(state = initialStateComment, action){
     switch (action.type) {
         case CommentActionTypes.getListComment:
-            // return updateDetailUserPayed(state, action.payload)
             return {
                 ...state
             };
-        // case CommentActionTypes.addComment:
-        //   return {
-        //       ...state,
-        //       getListComment: {...state.getListComment, canDownload : action.payload}
-        //   }
         case CommentActionTypes.InitializeCommentList:
         return {
             ...state,
-            getListComment : action.payload
+            isFetching : action.payload.isFetching,
+            getListComment : action.payload.getListComment
         };
+        case CommentActionTypes.addComment:
+            return {
+                ...state,
+                getListComment : {...state.getListComment, comments : [...state.getListComment.comments, action.payload] }
+            };
         default:
             return state;
     }

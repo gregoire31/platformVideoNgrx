@@ -1,7 +1,8 @@
 import { addUser, userListStore } from 'src/app/interface/user-interface';
 import { UserActionTypes } from './action';
 
-const initialStateUser: userListStore = {
+export const initialStateUser: userListStore = {
+    isFetching : false,
     getUserList : [{
         _id : '',
         password : '',
@@ -26,7 +27,6 @@ export function userReducer(state = initialStateUser, action){
             ...state,
             getUserList : [...state.getUserList, action.payload]
         };
-        // console.log(addUser);
         return newState;
         default:
             return state;

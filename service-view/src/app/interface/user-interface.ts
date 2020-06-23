@@ -5,6 +5,7 @@ export interface userList {
 }
 
 export interface userListStore {
+    isFetching: boolean,
     getUserList : userList[]
 }
 

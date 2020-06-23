@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Comments } from '../interface/comment-interface';
+import { Comments, Comment } from '../interface/comment-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class CommentsService {
       message,
       dateCreated
     }
-    return this.httpClient.post<Comments>('http://localhost:3000/comment', body)
+    return this.httpClient.post<Comment>('http://localhost:3000/comment', body)
   }
 
 }

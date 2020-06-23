@@ -3,7 +3,7 @@ import {  FilmDetail, authorizationDownload } from 'src/app/interface/film-inter
 
 export enum DetailActionTypes {
     getDetailType = '[Detail] get',
-    // InitializeDetailStateType = '[Detail] initialize',
+    InitializeDetailStateType = '[Detail] initialize',
     updateDetailUserPayedType = '[Detail] update detail list'
 }
 export class getOneDetail implements Action {
