@@ -11,7 +11,7 @@ export interface Comment {
 }
 
 export interface CommentStore {
-    isFetching: boolean;
+    isFetching: boolean,
     getListComment: {
         _id: string;
         comments: Comment[]

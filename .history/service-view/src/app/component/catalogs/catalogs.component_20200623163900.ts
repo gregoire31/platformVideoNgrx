@@ -33,7 +33,7 @@ export class CatalogsComponent implements OnInit {
         this.listFilms.getListFilm = response;
         const getListFilm = response;
         console.log(getListFilm);
-        this.store.dispatch(new catalogActions.InitialiseStateCatalogs(getListFilm));
+        this.store.dispatch(new catalogActions.initialiseStateCatalogs(getListFilm));
       },
       (error) => {
         console.log('Erreur ! : ' + error);

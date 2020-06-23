@@ -17,8 +17,8 @@ import * as detailAction from '../../store/detail/action';
 import * as commentAction from '../../store/comment/action';
 import * as selectDetail from '../../store/detail/selector';
 import * as selectComment from '../../store/comment/selector';
-import { initialStateDetail } from '../../store/detail/reducer';
-import { initialStateComment } from '../../store/comment/reducer';
+import { initialStateDetail } from '../../store/detail/reducer'
+import { initialStateComment } from '../../store/comment/reducer'
 import { tap } from 'rxjs/operators';
 import { IStore } from 'src/root.reducer';
 @Component({
@@ -28,7 +28,7 @@ import { IStore } from 'src/root.reducer';
 })
 
 export class DetailFilmComponent implements OnInit {
-  public commentStore: CommentStore = {
+  public commentStore : CommentStore = {
     isFetching : true,
     getListComment : {
       _id : '',
@@ -39,9 +39,10 @@ export class DetailFilmComponent implements OnInit {
         username : ''
       }]
     }
-  };
+  }
   public noComment = true;
-  public id = '';
+  // tslint:disable-next-line: ban-types
+  public id: String = '';
   public commentToSend = '';
   public commentaires: CommentStore = initialStateComment;
   public film: FilmListStoreDetail = initialStateDetail;
@@ -54,8 +55,8 @@ export class DetailFilmComponent implements OnInit {
   public any = {};
   public currentUserId = '';
   public currentUserName = '';
-  public idComment = '';
-  public commentList: Comment[];
+  public idComment : string = ''
+  public commentList : Comment[]
   constructor(private route: ActivatedRoute,
               private catalogService: CatalogsService,
               private authService: AuthService,
@@ -68,6 +69,7 @@ export class DetailFilmComponent implements OnInit {
     // console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a").)
 
     // let b = moment().format();
+    
     // let a = moment('2020-06-17T15:41:04+02:00')
     // let c = ((moment().diff(a)))
     // console.log(moment.duration(c).asHours());
@@ -79,7 +81,7 @@ export class DetailFilmComponent implements OnInit {
     const commentsList = this.commentService.getCommentList(this.id);
 
     forkJoin([detailFilm, userList, commentsList]).subscribe(results => {
-      const getListFilm =  {
+      let getListFilm =  {
         _id : results[0]._id,
         description : results[0].description,
         image : results[0].image,
@@ -95,10 +97,11 @@ export class DetailFilmComponent implements OnInit {
       if (results[2] !== null){
         console.log('il y a des commentaires');
         console.log(results[2]);
+        
         // this.commentaires.getListComment._id = results[2]._id;
         this.idComment = results[2]._id;
         // this.commentaires.getListComment.comments = results[2].comments;
-        this.commentList = results[2].comments;
+        this.commentList = results[2].comments
         if (this.commentaires !== null){
           this.noComment = false;
           let nameMap: {
@@ -108,7 +111,7 @@ export class DetailFilmComponent implements OnInit {
             ...accumulator, [currentValue._id] : currentValue.username
           }), {});
           this.commentList = this.commentList.map( comment => {
-            comment.username = nameMap[comment.userId].valueOf();
+            comment.username = nameMap[comment.userId].valueOf()
             return comment;
           });
           // this.commentList = this.commentList.map(
@@ -124,7 +127,8 @@ export class DetailFilmComponent implements OnInit {
           //     }
           //   );
 
-          console.log(this.commentList);
+            console.log(this.commentList);
+            
         }
         this.commentStore = {
           isFetching : false,
@@ -132,11 +136,13 @@ export class DetailFilmComponent implements OnInit {
             _id : getListFilm._id,
             comments : this.commentList
           }
-        };
+        }
         this.store.dispatch(new commentAction.InitializeCommentList(this.commentStore));
-        this.store.pipe(select(selectComment.getListComment), tap(comment => {
+        this.store.pipe(select(selectComment.getListComment),tap(comment => {
           console.log(comment);
-          this.commentaires = comment;
+          
+          this.commentaires = comment
+          
         })).subscribe();
       }
       getListFilm.usersPayed.map(
@@ -144,6 +150,7 @@ export class DetailFilmComponent implements OnInit {
               if (this.currentUserId === userPay.userId){
                 const authorization: authorizationDownload = {hasPayed : true, date : userPay.dateCreated};
                 console.log(userPay);
+                
                 getListFilm.canDownload = authorization;
                 // this.film = {
                 //   ...this.film,
@@ -170,8 +177,9 @@ export class DetailFilmComponent implements OnInit {
         }
       }
       // console.log(this.film.getListFilm);
+      
       this.store.dispatch(new detailAction.initialiseStateDetail(getListFilm));
-      this.store.pipe(select(selectDetail.getListDetailFilm), tap(film => {
+      this.store.pipe(select(selectDetail.getListDetailFilm),tap(film => {
         this.film = film;
       })).subscribe();
 
@@ -219,17 +227,18 @@ export class DetailFilmComponent implements OnInit {
     const userList = this.authService.getUserList();
     forkJoin([addComment, userList]).subscribe(results => {
       console.log(results[0]);
+      
       this.noComment = false;
       let nameMap: {
         [userId: string]: string
       };
-      let newComment: Comment;
-      newComment = results[0];
+      let newComment : Comment
+      newComment= results[0]
       nameMap = results[1].reduce((accumulator, currentValue: userList) => ({
         ...accumulator, [currentValue._id] : currentValue.username
       }), {});
-      newComment.username = nameMap[newComment.userId].valueOf();
-      this.store.dispatch(new commentAction.AddComment(newComment));
+      newComment.username = nameMap[newComment.userId].valueOf()
+      this.store.dispatch(new commentAction.AddComment(newComment))
       // this.commentList = this.commentList.map( comment => {
       //   comment.username = nameMap[comment.userId].valueOf()
       //   return comment;

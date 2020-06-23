@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../../service/auth.service'
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import { WrongPasswordModalComponent } from 'src/app/modals/wrong-password-modal/wrong-password-modal.component';
@@ -33,8 +33,8 @@ export class AuthentificationComponent implements OnInit {
       password: ['', Validators.required]
     });
     this.authService.getUserList().subscribe(usersList => {
-      this.store.dispatch(new AuthActions.InitialiseStateUser(usersList));
-    });
+      this.store.dispatch(new AuthActions.InitialiseStateUser(usersList))
+    })
   }
 
 isFieldInvalid(field: string) { // {6}
@@ -62,29 +62,30 @@ isFieldInvalid(field: string) { // {6}
     const val = this.form.value;
 
     if (this.form.valid) {
-        if (this.isLogging){
+        if(this.isLogging){
           this.authService.login(val.email, val.password)
               .subscribe(
                   (data) => {
-                    if (data[0].token === false){
-                      this.openDialog();
+                    if(data[0].token === false){
+                      this.openDialog()
                     }else{
+  
                     }
                     this.router.navigateByUrl('/catalogs-component');
                   }
-              );
+              )
         }else{
 
-          this.authService.register(val.email, val.password).subscribe(user => {
-            if (user.length === 1){
-              this.store.dispatch(new RegisterUser(user[0]));
-              this.isCorrectRegister = true;
-              this.openDialog();
-              this.isLogging = true;
+          this.authService.register(val.email,val.password).subscribe(user => {
+            if(user.length === 1){
+              this.store.dispatch(new RegisterUser(user[0]))
+              this.isCorrectRegister = true
+              this.openDialog()
+              this.isLogging = true
             }else{
-              this.openDialog();
+              this.openDialog()
             }
-          });
+          })
           // let userList = this.authService.getUserList()
           // forkJoin([addUser, userList]).subscribe(results => {
           //   console.log(results[0]);
@@ -96,6 +97,8 @@ isFieldInvalid(field: string) { // {6}
           //     this.openDialog()
           //     this.isLogging = true
           //   }
+            
+            
           // })
         }
     }
@@ -103,11 +106,11 @@ isFieldInvalid(field: string) { // {6}
   }
 
   goToLogin(){
-    this.isLogging = true;
+    this.isLogging = true
   }
 
   goToRegister(){
-    this.isLogging = false;
+    this.isLogging = false
   }
 
 }

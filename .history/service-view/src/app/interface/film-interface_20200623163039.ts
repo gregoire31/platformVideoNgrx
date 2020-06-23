@@ -1,6 +1,6 @@
 export interface Film {
     description: string;
-    image: string;
+    image : string;
     prix: string;
     title: string;
     // usersPayed : Array<userPay>,
@@ -9,16 +9,16 @@ export interface Film {
   }
 export interface FilmDetail {
     description: string;
-    image: string;
+    image : string;
     prix: string;
     title: string;
-    usersPayed: Array<userPay>;
+    usersPayed : Array<userPay>;
     _id: string;
     canDownload?: authorizationDownload;
   }
-export interface authorizationDownload {
+export interface authorizationDownload{
       hasPayed: boolean;
-      date: string;
+      date:string;
   }
 
 export interface userPay{
@@ -28,15 +28,15 @@ export interface userPay{
   }
 export interface timeLeft{
       hour: number;
-      minute: number;
+      minute : number;
   }
 
 export interface FilmListStore {
-    isFetching: boolean;
+    isFetching : boolean;
     getListFilm: Film[];
   }
 
 export interface FilmListStoreDetail {
-    isFetching: boolean;
+    isFetching : boolean;
     getListFilm: FilmDetail;
 }

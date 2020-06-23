@@ -20,20 +20,21 @@ export class CatalogsComponent implements OnInit {
       prix: '',
       title: ''
     }]
-  };
+  }
   constructor(
-    private route: Router,
-    private catalogService: CatalogsService,
-    private authService: AuthService,
-    private store: Store) { }
+    private route : Router,
+    private catalogService : CatalogsService,
+    private authService : AuthService,
+    private store : Store) { }
 
   ngOnInit(): void {
+    
     this.catalogService.getListFilms().subscribe(
       (response) => {
-        this.listFilms.getListFilm = response;
-        const getListFilm = response;
+        this.listFilms.getListFilm = response
+        let getListFilm = response
         console.log(getListFilm);
-        this.store.dispatch(new catalogActions.InitialiseStateCatalogs(getListFilm));
+        this.store.dispatch(new catalogActions.initialiseStateCatalogs(getListFilm))
       },
       (error) => {
         console.log('Erreur ! : ' + error);
@@ -42,14 +43,14 @@ export class CatalogsComponent implements OnInit {
   }
 
   logOut() {
-    this.authService.logout();
+    this.authService.logout()
   }
   goToCatalogs(){
-    this.catalogService.goToCategories();
+    this.catalogService.goToCategories()
   }
 
   goToDetailFilm(idFilm){
-    this.route.navigate(['/detail-film', idFilm]);
+    this.route.navigate(['/detail-film', idFilm])
   }
 
 }

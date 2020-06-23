@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Film } from 'src/app/interface/film-interface';
+import { FilmListStore, Film } from 'src/app/interface/film-interface';
 
 export enum CatalogActionTypes {
     ListCatalogs = '[Catalog] list',
